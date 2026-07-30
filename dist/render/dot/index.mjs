@@ -210,7 +210,7 @@ function states(pStates, pIndent, pOptions, pModel, pRenderedTransitions) {
 		.join("");
 }
 function transition(pTransition, pIndent, pOptions, pModel) {
-	const lLabel = `${escapeLabelString(pTransition.label ?? " ")}`;
+	const lLabel = `${escapeLabelString(pTransition.label ?? " ", getOptionValue(pOptions, "labelGap"))}`;
 	const lPenWidth = pTransition.width ? ` penwidth=${pTransition.width}` : "";
 	const lClass = pTransition.class
 		? `transition${pTransition.type ? " " + pTransition.type + " " : " "}${pTransition.class}`

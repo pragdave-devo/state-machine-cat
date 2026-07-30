@@ -48,6 +48,9 @@ const ALLOWED_VALUES = Object.freeze({
 		default: false,
 		values: [{ name: true }, { name: false }],
 	},
+	labelGap: {
+		default: 0,
+	},
 });
 export function getOptionValue(pOptions, pOptionName) {
 	return pOptions?.[pOptionName] ?? ALLOWED_VALUES[pOptionName].default;

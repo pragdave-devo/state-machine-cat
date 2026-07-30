@@ -30,12 +30,15 @@ export function escapeString(pString) {
 		.replaceAll('"', String.raw`\"`)
 		.concat(String.raw`\l`);
 }
-export function escapeLabelString(pString) {
-	return pString
-		.replaceAll("\\", String.raw`\\`)
-		.replaceAll(/\n\s*/g, String.raw`   \l`)
-		.replaceAll('"', String.raw`\"`)
-		.concat(String.raw`   \l`);
+export function escapeLabelString(pString, pLabelGap = 0) {
+	const lGap = " ".repeat(pLabelGap);
+	return lGap.concat(
+		pString
+			.replaceAll("\\", String.raw`\\`)
+			.replaceAll(/\n\s*/g, String.raw`   \l`.concat(lGap))
+			.replaceAll('"', String.raw`\"`)
+			.concat(String.raw`   \l`),
+	);
 }
 export function isVertical(pDirection) {
 	const lDirection = pDirection || "top-down";

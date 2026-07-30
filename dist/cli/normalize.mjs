@@ -77,6 +77,11 @@ function determineParameter(pOptions, pParameter) {
 		? pOptions[pParameter]
 		: getAllowedValues()[pParameter].default;
 }
+function determineLabelGap(pOptions) {
+	return Object.hasOwn(pOptions, "labelGap")
+		? Number(pOptions.labelGap)
+		: getAllowedValues().labelGap.default;
+}
 function determineDotAttributes(pOptions, pDotAttributes) {
 	return pOptions?.[pDotAttributes] &&
 		typeof pOptions[pDotAttributes] === "string"
@@ -107,6 +112,7 @@ export default function normalize(pArgument = "-", pLooseOptions = {}) {
 		dotGraphAttrs: determineDotAttributes(pLooseOptions, "dotGraphAttrs"),
 		dotNodeAttrs: determineDotAttributes(pLooseOptions, "dotNodeAttrs"),
 		dotEdgeAttrs: determineDotAttributes(pLooseOptions, "dotEdgeAttrs"),
+		labelGap: determineLabelGap(pLooseOptions),
 		desugar: pLooseOptions?.desugar ?? false,
 	};
 }

@@ -7,6 +7,7 @@ import {
 	validInputType,
 	validEngine,
 	validDirection,
+	validLabelGap,
 	validDotAttrs,
 	validateArguments,
 	defaultOutputType,
@@ -27,6 +28,8 @@ Options:
   -d, --direction <dir>     top-down|bottom-top|left-right|right-left (default:
                             "top-down")
   -o --output-to <file>     File to write to. use - for stdout.
+  --label-gap <number>      spaces between a transition's label and its line
+                            (default: "0")
   --desugar                 transform pseudo states into transitions
                             (!experimental!)
   -V, --version             output the version number
@@ -92,6 +95,9 @@ function parseArguments(pArguments) {
 		"dot-edge-attrs": {
 			type: "string",
 		},
+		"label-gap": {
+			type: "string",
+		},
 		desugar: {
 			type: "boolean",
 			default: false,
@@ -129,6 +135,8 @@ function parseArguments(pArguments) {
 		values["dot-node-attrs"] = validDotAttrs(values["dot-node-attrs"]);
 	if (values["dot-edge-attrs"])
 		values["dot-edge-attrs"] = validDotAttrs(values["dot-edge-attrs"]);
+	if (values["label-gap"])
+		values["label-gap"] = validLabelGap(values["label-gap"]);
 	return { values: camelizeObject(values), positionals };
 }
 export default async function cli(pArguments = process.argv, pOptions) {

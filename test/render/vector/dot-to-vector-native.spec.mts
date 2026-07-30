@@ -92,6 +92,12 @@ if (isAvailable({})) {
       equal(convert(lTriangle), convert(lTriangle, { engine: "dot" }));
     });
 
+    it("returns non-ASCII in text output undamaged", () => {
+      const lFound = convert('digraph { a [label="em—dash · 👤"] }');
+
+      equal(lFound.includes("em—dash · 👤"), true);
+    });
+
     it("throws an error when presented with an invalid dot", () => {
       throws(() => {
         convert("this ain't no dot program");
